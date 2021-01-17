@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 using CommandLine;
@@ -13,11 +14,17 @@ namespace FormatConverter.CLI
 
         private static void Main(string[] args)
         {
+            AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
             Parser.Default.ParseArguments<Options>(args)
-                .WithParsed(options => { ConvertFormatAsync(options).Wait(); });
+                .WithParsed(options =>
+                {
+                    Console.WriteLine("Conversion started ...");
+                    ConvertFormatAsync(options).Wait();
+                    Console.WriteLine("Conversion successfully completed");
+                });
         }
 
-        public static async Task ConvertFormatAsync(Options options)
+        private static async Task ConvertFormatAsync(Options options)
         {
             var source = new FileSource(options.Source, Encoding);
             var deserializer = CreateDeserializer(options.SourceFormatEnum);
@@ -29,7 +36,7 @@ namespace FormatConverter.CLI
             await conversion.RunAsync();
         }
 
-        public static ISourceDeserializer<string, Document> CreateDeserializer(SourceFormatEnum sourceFormat)
+        private static ISourceDeserializer<string, Document> CreateDeserializer(SourceFormatEnum sourceFormat)
         {
             switch (sourceFormat)
             {
@@ -42,7 +49,8 @@ namespace FormatConverter.CLI
             }
         }
 
-        public static IDestinationSerializer<string, Document> CreateSerializer(DestinationFormatEnum destinationFormat)
+        private static IDestinationSerializer<string, Document> CreateSerializer(
+            DestinationFormatEnum destinationFormat)
         {
             switch (destinationFormat)
             {
@@ -53,6 +61,14 @@ namespace FormatConverter.CLI
                 default:
                     throw new InvalidEnumArgumentException("Unknown destination format");
             }
+        }
+
+        private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e)
+        {
+            Console.WriteLine(e.ExceptionObject.ToString());
+            Console.WriteLine("Press Enter to continue");
+            Console.ReadLine();
+            Environment.Exit(1);
         }
     }
 }
