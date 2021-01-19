@@ -32,7 +32,7 @@ namespace FormatConverter.CLI
             var destination = new FileDestination(options.Destination, Encoding);
 
             var conversion =
-                new FormatConversion<string, Document>(source, deserializer, serializer, destination);
+                new FormatConversion<string, Document, string>(source, deserializer, serializer, destination);
             await conversion.RunAsync();
         }
 
@@ -49,7 +49,7 @@ namespace FormatConverter.CLI
             }
         }
 
-        private static IDestinationSerializer<string, Document> CreateSerializer(
+        private static IDestinationSerializer<Document, string> CreateSerializer(
             DestinationFormatEnum destinationFormat)
         {
             switch (destinationFormat)

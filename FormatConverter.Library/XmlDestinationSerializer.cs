@@ -6,7 +6,7 @@ using FormatConverter.Interfaces;
 
 namespace FormatConverter.Library
 {
-    public class XmlDestinationSerializer<TModel> : IDestinationSerializer<string, TModel> where TModel : class
+    public class XmlDestinationSerializer<TModel> : IDestinationSerializer<TModel, string> where TModel : class
     {
         private readonly Encoding _encoding;
 

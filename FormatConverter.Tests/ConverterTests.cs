@@ -54,7 +54,7 @@ namespace FormatConverter.Tests
             var serializer = new XmlDestinationSerializer<Document>(_encoding);
             var destinationPath = "./Temp/document.xml";
             var destination = new FileDestination(destinationPath, _encoding);
-            var conversion = new FormatConversion<string, Document>(source, deserializer, serializer, destination);
+            var conversion = new FormatConversion<string, Document, string>(source, deserializer, serializer, destination);
 
             await conversion.RunAsync();
 
@@ -70,7 +70,7 @@ namespace FormatConverter.Tests
             var serializer = new XmlDestinationSerializer<Document>(_encoding);
             var destinationPath = "./Temp/null.xml";
             var destination = new FileDestination(destinationPath, _encoding);
-            var conversion = new FormatConversion<string, Document>(source, deserializer, serializer, destination);
+            var conversion = new FormatConversion<string, Document, string>(source, deserializer, serializer, destination);
 
             await conversion.RunAsync();
 
@@ -87,7 +87,7 @@ namespace FormatConverter.Tests
             var serializer = new JsonDestinationSerializer<Document>();
             var destinationPath = "./Temp/document.json";
             var destination = new FileDestination(destinationPath, _encoding);
-            var conversion = new FormatConversion<string, Document>(source, deserializer, serializer, destination);
+            var conversion = new FormatConversion<string, Document, string>(source, deserializer, serializer, destination);
 
             await conversion.RunAsync();
 
@@ -103,7 +103,7 @@ namespace FormatConverter.Tests
             var serializer = new JsonDestinationSerializer<Document>();
             var destinationPath = "./Temp/document.json";
             var destination = new FileDestination(destinationPath, _encoding);
-            var conversion = new FormatConversion<string, Document>(source, deserializer, serializer, destination);
+            var conversion = new FormatConversion<string, Document, string>(source, deserializer, serializer, destination);
 
             await conversion.RunAsync();
 

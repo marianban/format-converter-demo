@@ -1,7 +1,7 @@
 ﻿
 namespace FormatConverter.Interfaces
 {
-    public interface IDestinationSerializer<out TRaw, in TModel> where TModel : class
+    public interface IDestinationSerializer<in TModel, out TRaw> where TModel : class
     {
         /// <summary>
         /// Serializes model into raw data

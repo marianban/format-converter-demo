@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace FormatConverter.Library
 {
-    public class JsonDestinationSerializer<TModel> : IDestinationSerializer<string, TModel> where TModel : class
+    public class JsonDestinationSerializer<TModel> : IDestinationSerializer<TModel, string> where TModel : class
     {
         ///<inheritdoc/>
         public string Serialize(TModel model)

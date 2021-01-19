@@ -3,15 +3,15 @@ using FormatConverter.Interfaces;
 
 namespace FormatConverter.Library
 {
-    public class FormatConversion<TRaw, TModel> : IFormatConversion where TModel : class
+    public class FormatConversion<TRawIn, TModel, TRawOut> : IFormatConversion where TModel : class
     {
-        private readonly ISource<TRaw> _source;
-        private readonly ISourceDeserializer<TRaw, TModel> _deserializer;
-        private readonly IDestinationSerializer<TRaw, TModel> _serializer;
-        private readonly IDestination<TRaw> _destination;
+        private readonly ISource<TRawIn> _source;
+        private readonly ISourceDeserializer<TRawIn, TModel> _deserializer;
+        private readonly IDestinationSerializer<TModel, TRawOut> _serializer;
+        private readonly IDestination<TRawOut> _destination;
 
-        public FormatConversion(ISource<TRaw> source, ISourceDeserializer<TRaw, TModel> deserializer,
-            IDestinationSerializer<TRaw, TModel> serializer, IDestination<TRaw> destination)
+        public FormatConversion(ISource<TRawIn> source, ISourceDeserializer<TRawIn, TModel> deserializer,
+            IDestinationSerializer<TModel, TRawOut> serializer, IDestination<TRawOut> destination)
         {
             _source = source;
             _deserializer = deserializer;

@@ -1,20 +1,29 @@
 # Format Converter CLI
 
-  --sourceType               (Default: File) Data Source Type (File)
+Simple CLI app for converting one format to another.
 
-  -s, --source               Required. Data Source (file path)
+--sourceType (Default: File) Data Source Type (File) <br>
+-s, --source Required. Data Source (file path) <br>
+-f, --sourceFormat Required. Source Format (Json, Xml) <br>
+--sourceType (Default: File) Data Destination Type (File) <br>
+-d, --destination Required. Data Destination (file path) <br>
+-o, --destinationFormat Required. Destination Format (Json, Xml)
 
-  -f, --sourceFormat         Required. Source Format (Json, Xml)
+--help Display this help screen.
 
-  --sourceType               (Default: File) Data Destination Type (File)
+--version Display version information.
 
-  -d, --destination          Required. Data Destination (file path)
+## Usage:
 
-  -o, --destinationFormat    Required. Destination Format (Json, Xml)
+- build the CLI converter
+- go to FormatConverter.CLI\bin\Debug\netcoreapp3.1
+- run: `FormatConverter.CLI.exe -s ./document.json -f Json -o Xml -d ./out.xml`
+  document.json and document.xml are available in the output dir
 
-  --help                     Display this help screen.
+## Open points
 
-  --version                  Display version information.
+- better error handling and resiliency
 
-Example of usage:
-  ```FormatConverter.CLI.exe -s ./document.json -f Json -o Xml -d ./out.xml```
+## Original solution
+
+- Homework.cs - contains inline comments for code issues
